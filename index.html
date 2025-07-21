@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cyber Base | Comprehensive Cyber Security Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Cinzel:wght@400;700&display=stylesheet" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            /* Day Mode (Default) */
+            --primary: #2563EB; /* Vibrant blue for trust and professionalism */
+            --secondary: #10B981; /* Emerald green for growth and learning */
+            --accent: #F59E0B; /* Warm amber for approachability */
+            --background: #F9FAFB; /* Light gray for clean, readable background */
+            --text-light: #1F2937; /* Dark gray for text clarity */
+            --text-dark: #111827; /* Deep gray for emphasis */
+            --glass: rgba(255, 255, 255, 0.8); /* Subtle glass effect */
+            --glass-hover: rgba(255, 255, 255, 0.9);
+            --shadow: rgba(37, 99, 235, 0.2); /* Soft blue shadow */
+            --glow: rgba(16, 185, 129, 0.3); /* Green glow for interactivity */
+            --highlight: #3B82F6; /* Lighter blue for highlights */
+            --neutral: #6B7280; /* Neutral gray for secondary elements */
+            --card-bg: rgba(255, 255, 255, 0.95); /* White card background */
+        }
+
+        [data-theme="night"] {
+            --primary: #3B82F6; /* Softer blue for night */
+            --secondary: #34D399; /* Lighter green for contrast */
+            --accent: #FBBF24; /* Brighter amber for warmth */
+            --background: #1F2937; /* Dark slate for night mode */
+            --text-light: #F3F4F6; /* Light gray for text readability */
+            --text-dark: #111827;
+            --glass: rgba(31, 41, 55, 0.8); /* Dark glass effect */
+            --glass-hover: rgba(31, 41, 55, 0.9);
+            --shadow: rgba(59, 130, 246, 0.3); /* Blue shadow */
+            --glow: rgba(52, 211, 153, 0.4); /* Green glow */
+            --highlight: #60A5FA; /* Lighter blue highlight */
+            --neutral: #9CA3AF; /* Light gray for neutral elements */
+            --card-bg: rgba(31, 41, 55, 0.9); /* Dark slate card */
+        }
+
+        [data-theme="twilight"] {
+            --primary: #7C3AED; /* Deep violet for a calm, focused vibe */
+            --secondary: #EC4899; /* Soft pink for warmth */
+            --accent: #F59E0B; /* Amber for consistency */
+            --background: #2D3748; /* Darker slate for a cozy feel */
+            --text-light: #E5E7EB; /* Light gray for readability */
+            --text-dark: #111827;
+            --glass: rgba(124, 58, 237, 0.2); /* Violet glass effect */
+            --glass-hover: rgba(124, 58, 237, 0.3);
+            --shadow: rgba(124, 58, 237, 0.3); /* Violet shadow */
+            --glow: rgba(236, 72, 153, 0.4); /* Pink glow */
+            --highlight: #A78BFA; /* Light violet highlight */
+            --neutral: #9CA3AF; /* Neutral gray */
+            --card-bg: rgba(45, 55, 72, 0.9); /* Dark slate card */
+        }
+
+        [data-theme="aurora"] {
+            --primary: #059669; /* Teal for a refreshing, modern look */
+            --secondary: #F472B6; /* Soft magenta for vibrancy */
+            --accent: #FBBF24; /* Amber for warmth */
+            --background: #E6FFFA; /* Light teal for a fresh background */
+            --text-light: #1F2937; /* Dark gray for contrast */
+            --text-dark: #111827;
+            --glass: rgba(5, 150, 105, 0.2); /* Teal glass effect */
+            --glass-hover: rgba(5, 150, 105, 0.3);
+            --shadow: rgba(5, 150, 105, 0.2); /* Teal shadow */
+            --glow: rgba(244, 114, 182, 0.4); /* Magenta glow */
+            --highlight: #34D399; /* Lighter teal highlight */
+            --neutral: #6B7280; /* Neutral gray */
+            --card-bg: rgba(255, 255, 255, 0.95); /* White card for contrast */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-light);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .cyber-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, var(--glow) 0%, var(--background) 70%);
+            overflow: hidden;
+        }
+
+        .circuit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            opacity: 0.15;
+            animation: circuitFlow 20s ease-in-out infinite;
+        }
+
+        @keyframes circuitFlow {
+            0% { transform: translate(0, 0); opacity: 0.15; }
+            50% { transform: translate(20px, 20px); opacity: 0.25; }
+            100% { transform: translate(0, 0); opacity: 0.15; }
+        }
+
+        .bits {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .bit {
+            position: absolute;
+            background: var(--highlight);
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: pulseBit 6s infinite linear;
+        }
+
+        .small-bit { width: 2px; height: 2px; animation-duration: 5s; }
+        .medium-bit { width: 4px; height: 4px; animation-duration: 7s; }
+        .large-bit { width: 6px; height: 6px; animation-duration: 9s; }
+
+        @keyframes pulseBit {
+            0% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        .data-particle {
+            position: absolute;
+            background: var(--glow);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: stream 15s infinite linear;
+        }
+
+        @keyframes stream {
+            0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0.4; }
+        }
+
+        .mode-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-toggle:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .mode-toggle i {
+            font-size: 1.4rem;
+            color: var(--text-light);
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            padding-bottom: 80px;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-light), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px var(--glow)); }
+            100% { filter: drop-shadow(0 0 25px var(--accent)); }
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            opacity: 0.9;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+ .hero-description {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            opacity: 0.85;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--text-light);
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .knowledge-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--neutral);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 6px 20px var(--shadow);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--shadow);
+            border-color: var(--secondary);
+        }
+
+        .knowledge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--highlight));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .knowledge-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .knowledge-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .knowledge-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px var(--glow);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .knowledge-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .knowledge-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+
+        .knowledge-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--secondary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-link:hover {
+            color: var(--highlight);
+            transform: translateX(5px);
+        }
+
+        .detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            z-index: 1002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .detail-container {
+            background: linear-gradient(135deg, var(--card-bg), var(--glow));
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 6px 25px var(--shadow);
+            position: relative;
+            color: var(--text-light);
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .detail-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.6rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .detail-content {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            transition: background 0.3s ease;
+        }
+
+        .detail-section:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .detail-subheader {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .detail-subheader::after {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            border-radius: 1px;
+        }
+
+        .detail-list {
+            list-style-type: none;
+            padding-left: 15px;
+        }
+
+        .detail-list li {
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 15px;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            line-height: 1.7;
+            transition: color 0.3s ease;
+        }
+
+        .detail-list li:hover {
+            color: var(--secondary);
+        }
+
+        .detail-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+
+        .detail-list li strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: var(--highlight);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .close-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--glow);
+        }
+
+        footer {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--secondary);
+            padding: 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--highlight);
+        }
+
+        @media (max-width: 1024px) {
+            .hero { padding: 100px 15px 50px; }
+            .hero-title { font-size: clamp(2rem, 6vw, 3.5rem); }
+            .knowledge-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+            .detail-container { padding: 25px; max-width: 700px; max-height: 90vh; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 80px 15px 40px; }
+            .hero-title { font-size: clamp(1.8rem, 5vw, 3rem); }
+            .section-title { font-size: clamp(1.6rem, 4vw, 2rem); }
+            .detail-container { padding: 20px; max-width: 95%; }
+        }
+
+        @media (max-width: 480px) {
+            .knowledge-grid { grid-template-columns: 1fr; }
+            .knowledge-card { padding: 20px; }
+            .knowledge-title { font-size: 1.3rem; }
+            .detail-container { padding: 15px; max-width: 95%; }
+            .detail-title { font-size: clamp(1.2rem, 3.5vw, 1.5rem); }
+            .close-btn { padding: 8px 16px; font-size: 0.85rem; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease both;
+        }
+    </style>
+</head>
+<body data-theme="day">
+    <div class="cyber-background">
+        <div class="circuit"></div>
+        <div class="bits" id="bits"></div>
+        <div class="particles" id="particles"></div>
+    </div>
+
+    <div class="mode-toggle" onclick="cycleTheme()">
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <div class="main-container">
+        <section class="hero">
+            <h1 class="hero-title">Cyber Base</h1>
+            <p class="hero-subtitle">Wecome to Cyber Base.</p>
+           </section>
+
+        <div class="container">
+            <section class="section" id="fundamentals">
+                <h2 class="section-title">Fundamentals</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="cia-triad">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="knowledge-title">CIA Triad & Core Principles</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Master the principles of Confidentiality, Integrity, and Availability, the cornerstone of cyber security, ensuring robust data protection.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('cia-triad')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="threat-modeling">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-bug"></i></div>
+                            <h3 class="knowledge-title">Threat Modeling</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Learn to identify, prioritize, and mitigate threats using structured methodologies like STRIDE and attack trees.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('threat-modeling')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="risk-assessment">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-balance-scale"></i></div>
+                            <h3 class="knowledge-title">Risk Assessment</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Evaluate risks to assets, assess likelihood and impact, and develop prioritized mitigation strategies.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('risk-assessment')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="cryptography-basics">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-lock"></i></div>
+                            <h3 class="knowledge-title">Cryptography Essentials</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Understand encryption, hashing, and digital signatures to secure data and communications effectively.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('cryptography-basics')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="security-frameworks">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-sitemap"></i></div>
+                            <h3 class="knowledge-title">Security Frameworks</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Explore NIST, ISO 27001, and COBIT for structured cyber security management and compliance.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('security-frameworks')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="network-security">
+                <h2 class="section-title">Network Security</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="network-protocols">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-network-wired"></i></div>
+                            <h3 class="knowledge-title">Network Protocols & Vulnerabilities</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Study TCP/IP, HTTP/HTTPS, and vulnerabilities like packet sniffing to secure network communications.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('network-protocols')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="firewalls-ids">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="knowledge-title">Firewalls & IDS/IPS</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Implement firewalls and intrusion detection/prevention systems to safeguard network infrastructure.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('firewalls-ids')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="wireless-security">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-wifi"></i></div>
+                            <h3 class="knowledge-title">Wireless Security</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Secure Wi-Fi with WPA3 and protect against threats like rogue access points and eavesdropping.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('wireless-security')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="network-monitoring">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-eye"></i></div>
+                            <h3 class="knowledge-title">Network Monitoring & Analysis</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Use tools like Wireshark and SIEM to monitor and analyze network traffic for threats.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('network-monitoring')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="application-security">
+                <h2 class="section-title">Application Security</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="owasp-top-10">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-code"></i></div>
+                            <h3 class="knowledge-title">OWASP Top 10</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Address critical web vulnerabilities like XSS, SQL injection, and broken authentication.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('owasp-top-10')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="secure-coding">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-laptop-code"></i></div>
+                            <h3 class="knowledge-title">Secure Coding Practices</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Adopt coding standards to prevent vulnerabilities in software development processes.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('secure-coding')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="web-app-testing">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-vial"></i></div>
+                            <h3 class="knowledge-title">Web Application Testing</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Perform penetration testing and vulnerability scanning to secure web applications.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('web-app-testing')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="mobile-security">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h3 class="knowledge-title">Mobile Security Essentials</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Protect mobile apps from data leakage, insecure APIs, and other mobile-specific threats.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('mobile-security')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="resources-tools">
+                <h2 class="section-title">Resources and Tools</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card fade-in-up" data-knowledge="essential-tools">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-tools"></i></div>
+                            <h3 class="knowledge-title">Essential Security Tools</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Master tools like Nmap, Metasploit, and Burp Suite for network and application security.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('essential-tools')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="command-references">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-terminal"></i></div>
+                            <h3 class="knowledge-title">Command References</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Quick references for Linux, PowerShell, and network commands for security tasks.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('command-references')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="incident-response">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <h3 class="knowledge-title">Incident Response Checklists</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Step-by-step guides for responding to cyber incidents effectively and efficiently.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('incident-response')">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="knowledge-card fade-in-up" data-knowledge="further-learning">
+                        <div class="knowledge-header">
+                            <div class="knowledge-icon"><i class="fas fa-book"></i></div>
+                            <h3 class="knowledge-title">Further Learning Resources</h3>
+                        </div>
+                        <div class="knowledge-content">
+                            <p class="knowledge-description">Curated books, courses, and communities to advance your cyber security expertise.</p>
+                            <a href="#" class="knowledge-link" onclick="toggleDetail('further-learning')">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="detail-overlay" id="detailOverlay">
+            <div class="detail-container">
+                <h3 class="detail-title" id="detailTitle"></h3>
+                <div class="detail-content" id="detailContent"></div>
+                <button class="close-btn" onclick="closeDetail()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Crafted with dedication by <a href="https://wa.me/+2348128197651" target="_blank">Sisco Ask</a> | © <span id="footer-year"></span>
+    </footer>
+
+    <script>
+        const knowledgeDetails = {
+            'cia-triad': {
+                title: 'CIA Triad & Core Principles',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>The CIA Triad—Confidentiality, Integrity, and Availability—is the cornerstone of cyber security, ensuring data protection, trustworthiness, and accessibility.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Confidentiality</strong>: Limits access to authorized users only. Example: AES-256 encryption protects sensitive data like medical records.</li>
+                            <li><strong>Integrity</strong>: Ensures data accuracy and prevents unauthorized changes. Example: SHA-256 hashing verifies software downloads (e.g., 99.9% tamper detection).</li>
+                            <li><strong>Availability</strong>: Ensures systems are accessible to legitimate users. Example: DDoS mitigation maintains website uptime during attacks.</li>
+                            <li><strong>Authentication</strong>: Verifies user identity. Example: Multi-factor authentication (MFA) reduces unauthorized access by 99.9% (NIST).</li>
+                            <li><strong>Non-repudiation</strong>: Proves actions were performed by specific users. Example: Digital signatures in email ensure sender authenticity.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Healthcare</strong>: Encrypting patient data to comply with HIPAA (e.g., 90% of breaches involve unencrypted data).</li>
+                            <li><strong>Finance</strong>: Using checksums to verify transaction integrity in banking systems.</li>
+                            <li><strong>E-commerce</strong>: Implementing load balancers to ensure website availability during high traffic.</li>
+                            <li><strong>Government</strong>: Securing classified documents with role-based access control (RBAC).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes empower learners to build secure systems.</p>
+                    </div>
+                `
+            },
+            'threat-modeling': {
+                title: 'Threat Modeling',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Threat modeling systematically identifies and prioritizes potential threats to systems, enabling proactive security measures.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>STRIDE Model</strong>: Analyzes Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege.</li>
+                            <li><strong>Attack Trees</strong>: Visualizes attack paths. Example: Mapping a ransomware attack from phishing to data encryption.</li>
+                            <li><strong>Threat Identification</strong>: Lists assets and vulnerabilities. Example: 70% of breaches exploit known software flaws (Verizon DBIR).</li>
+                            <li><strong>Mitigation Strategies</strong>: Applies controls like encryption or rate-limiting to reduce risks.</li>
+                            <li><strong>Threat Intelligence</strong>: Uses data to predict attack vectors. Example: Monitoring dark web for stolen credentials.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Software Development</strong>: Identifying XSS risks during app design.</li>
+                            <li><strong>Network Security</strong>: Mapping threats to VPN infrastructure.</li>
+                            <li><strong>Cloud Security</strong>: Assessing misconfiguration risks in AWS S3 buckets.</li>
+                            <li><strong>IoT</strong>: Modeling threats to smart devices like cameras.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes strengthen proactive defense.</p>
+                    </div>
+                `
+            },
+            'risk-assessment': {
+                title: 'Risk Assessment',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Risk assessment identifies, analyzes, and prioritizes risks to assets, guiding effective mitigation strategies.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Risk Identification</strong>: Cataloging assets like servers and threats like ransomware.</li>
+                            <li><strong>Quantitative Analysis</strong>: Estimating financial impact (e.g., $100K loss from a data breach).</li>
+                            <li><strong>Qualitative Analysis</strong>: Assessing likelihood and severity (e.g., high-risk vulnerabilities).</li>
+                            <li><strong>Risk Prioritization</strong>: Using risk matrices to focus on critical threats.</li>
+                            <li><strong>Mitigation</strong>: Implementing backups to reduce data loss risk by 80% (Gartner).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Enterprise Security</strong>: Assessing risks to corporate databases.</li>
+                            <li><strong>Compliance</strong>: Meeting GDPR requirements with risk audits.</li>
+                            <li><strong>Incident Planning</strong>: Preparing for ransomware with recovery plans.</li>
+                            <li><strong>Supply Chain</strong>: Evaluating third-party vendor risks.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Authored by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes enhance risk management skills.</p>
+                    </div>
+                `
+            },
+            'cryptography-basics': {
+                title: 'Cryptography Essentials',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Cryptography secures data and communications using techniques like encryption, hashing, and digital signatures.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Symmetric Encryption</strong>: AES-256 for fast, secure data storage (e.g., encrypting database backups).</li>
+                            <li><strong>Asymmetric Encryption</strong>: RSA-2048 for secure key exchange in SSL/TLS.</li>
+                            <li><strong>Hashing</strong>: SHA-256 ensures data integrity (e.g., verifying software updates).</li>
+                            <li><strong>Digital Signatures</strong>: Validates authenticity (e.g., signing software releases).</li>
+                            <li><strong>PKI</strong>: Manages certificates for secure communications (e.g., HTTPS certificates).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Web Security</strong>: SSL/TLS for HTTPS (e.g., 99% of websites use TLS 1.3).</li>
+                            <li><strong>VPNs</strong>: Encrypting traffic with AES for remote work.</li>
+                            <li><strong>Blockchain</strong>: Securing transactions with ECDSA.</li>
+                            <li><strong>Email Security</strong>: Using PGP for encrypted communications.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes deepen cryptography expertise.</p>
+                    </div>
+                `
+            },
+            'security-frameworks': {
+                title: 'Security Frameworks',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Security frameworks like NIST, ISO 27001, and COBIT provide structured approaches to manage cyber risks and compliance.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>NIST CSF</strong>: Five functions: Identify, Protect, Detect, Respond, Recover.</li>
+                            <li><strong>ISO 27001</strong>: ISMS standard for security management (e.g., adopted by 90% of large enterprises).</li>
+                            <li><strong>COBIT</strong>: Aligns IT with business goals for security governance.</li>
+                            <li><strong>Zero Trust</strong>: Assumes no trust, verifies everything (e.g., Google’s BeyondCorp).</li>
+                            <li><strong>Compliance</strong>: Ensures adherence to GDPR, HIPAA, and PCI-DSS.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Corporate Security</strong>: Implementing NIST CSF for risk management.</li>
+                            <li><strong>Audits</strong>: Achieving ISO 27001 certification.</li>
+                            <li><strong>Cloud Security</strong>: Applying Zero Trust in cloud environments.</li>
+                            <li><strong>Healthcare</strong>: Ensuring HIPAA compliance with frameworks.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes guide framework adoption.</p>
+                    </div>
+                `
+            },
+            'network-protocols': {
+                title: 'Network Protocols & Vulnerabilities',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Network protocols enable communication but are prone to vulnerabilities that attackers exploit.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>TCP/IP</strong>: Core protocol suite vulnerable to MITM attacks (e.g., ARP spoofing).</li>
+                            <li><strong>HTTP/HTTPS</strong>: HTTPS uses TLS to secure web traffic (e.g., 99% of sites use HTTPS).</li>
+                            <li><strong>DNS</strong>: Susceptible to spoofing and cache poisoning (e.g., DNSSEC mitigates risks).</li>
+                            <li><strong>Packet Sniffing</strong>: Captures unencrypted data (e.g., mitigated by TLS encryption).</li>
+                            <li><strong>ICMP</strong>: Used in ping attacks; requires rate-limiting.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Network Design</strong>: Implementing TLS for secure communications.</li>
+                            <li><strong>Penetration Testing</strong>: Exploiting DNS vulnerabilities.</li>
+                            <li><strong>Monitoring</strong>: Detecting ARP spoofing with intrusion detection.</li>
+                            <li><strong>IoT Security</strong>: Securing MQTT protocols in smart devices.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes strengthen protocol security.</p>
+                    </div>
+                `
+            },
+            'firewalls-ids': {
+                title: 'Firewalls & IDS/IPS',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Firewalls and IDS/IPS systems protect networks by filtering traffic and detecting/preventing intrusions.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Packet Filtering Firewalls</strong>: Block traffic by port/IP (e.g., block port 23 for Telnet).</li>
+                            <li><strong>Stateful Inspection</strong>: Tracks connection states (e.g., blocks unsolicited packets).</li>
+                            <li><strong>Next-Gen Firewalls</strong>: Includes DPI and app awareness (e.g., blocks 95% of malware).</li>
+                            <li><strong>IDS</strong>: Detects anomalies (e.g., Snort alerts on suspicious traffic).</li>
+                            <li><strong>IPS</strong>: Actively blocks threats (e.g., stops SQL injection in real-time).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Enterprise Networks</strong>: Segmenting networks with firewalls.</li>
+                            <li><strong>Cloud Security</strong>: Deploying AWS WAF for web traffic.</li>
+                            <li><strong>Incident Detection</strong>: Using Suricata for real-time alerts.</li>
+                            <li><strong>Compliance</strong>: Meeting PCI-DSS with firewall rules.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes enhance network defense.</p>
+                    </div>
+                `
+            },
+            'wireless-security': {
+                title: 'Wireless Security',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Wireless security protects Wi-Fi networks from unauthorized access, eavesdropping, and rogue access points.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>WPA3</strong>: Latest Wi-Fi security with 128-bit encryption (e.g., prevents brute-force attacks).</li>
+                            <li><strong>Rogue Access Points</strong>: Unauthorized APs (e.g., 20% of breaches involve rogue APs).</li>
+                            <li><strong>EAP-TLS</strong>: Enterprise-grade authentication for secure Wi-Fi.</li>
+                            <li><strong>Encryption</strong>: AES-CCMP for wireless traffic security.</li>
+                            <li><strong>Guest Networks</strong>: Isolating guest devices to reduce risks.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Corporate Wi-Fi</strong>: Securing employee networks with WPA3.</li>
+                            <li><strong>Public Wi-Fi</strong>: Using VPNs to protect data (e.g., NordVPN).</li>
+                            <li><strong>IoT Security</strong>: Securing smart home devices on Wi-Fi.</li>
+                            <li><strong>Retail</strong>: Protecting POS systems on wireless networks.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes secure wireless environments.</p>
+                    </div>
+                `
+            },
+            'network-monitoring': {
+                title: 'Network Monitoring & Analysis',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Network monitoring uses tools to detect, analyze, and respond to threats in real-time.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Wireshark</strong>: Captures and analyzes packets (e.g., detects unencrypted HTTP traffic).</li>
+                            <li><strong>SIEM</strong>: Centralizes logs for threat detection (e.g., Splunk identifies 80% of anomalies).</li>
+                            <li><strong>NetFlow</strong>: Monitors network flow for performance and security.</li>
+                            <li><strong>Packet Analysis</strong>: Identifies malicious patterns like C2 traffic.</li>
+                            <li><strong>Log Aggregation</strong>: Correlates logs for incident investigation.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Incident Response</strong>: Detecting breaches with SIEM tools.</li>
+                            <li><strong>Performance Monitoring</strong>: Using NetFlow for bandwidth analysis.</li>
+                            <li><strong>Forensics</strong>: Analyzing packet captures post-incident.</li>
+                            <li><strong>Compliance</strong>: Logging for GDPR audit trails.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes enhance monitoring skills.</p>
+                    </div>
+                `
+            },
+            'owasp-top-10': {
+                title: 'OWASP Top 10',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>The OWASP Top 10 lists critical web application vulnerabilities to guide secure development and testing.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Injection</strong>: SQL injection exploits (e.g., affects 30% of web apps, OWASP).</li>
+                            <li><strong>Broken Authentication</strong>: Weak sessions (e.g., session hijacking via stolen cookies).</li>
+                            <li><strong>XSS</strong>: Injects malicious scripts (e.g., mitigated by input sanitization).</li>
+                            <li><strong>Security Misconfiguration</strong>: Default settings (e.g., exposed admin panels).</li>
+                            <li><strong>Insecure Deserialization</strong>: Exploits untrusted data (e.g., RCE attacks).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Web Development</strong>: Using prepared statements for SQL queries.</li>
+                            <li><strong>Penetration Testing</strong>: Testing for XSS with Burp Suite.</li>
+                            <li><strong>Training</strong>: Educating developers on Content Security Policy (CSP).</li>
+                            <li><strong>E-commerce</strong>: Securing payment forms against injection.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes improve app security.</p>
+                    </div>
+                `
+            },
+            'secure-coding': {
+                title: 'Secure Coding Practices',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Secure coding prevents vulnerabilities by following standards during software development.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Input Validation</strong>: Sanitizes inputs to prevent XSS and injection (e.g., using regex).</li>
+                            <li><strong>Least Privilege</strong>: Minimizes access (e.g., running apps as non-root).</li>
+                            <li><strong>Error Handling</strong>: Avoids leaking sensitive data (e.g., generic error messages).</li>
+                            <li><strong>Secure APIs</strong>: Uses OAuth 2.0 for authentication.</li>
+                            <li><strong>Code Reviews</strong>: Identifies vulnerabilities early (e.g., 60% of flaws caught in review).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Web Apps</strong>: Escaping outputs to prevent XSS.</li>
+                            <li><strong>Mobile Apps</strong>: Encrypting local storage with AES.</li>
+                            <li><strong>DevOps</strong>: Integrating SAST tools in CI/CD pipelines.</li>
+                            <li><strong>APIs</strong>: Validating JSON inputs to prevent injection.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes promote secure coding.</p>
+                    </div>
+                `
+            },
+            'web-app-testing': {
+                title: 'Web Application Testing',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Web application testing identifies vulnerabilities using penetration testing and automated scanning.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Penetration Testing</strong>: Simulates attacks (e.g., exploiting XSS with payloads).</li>
+                            <li><strong>Vulnerability Scanning</strong>: Uses Nessus to detect flaws (e.g., misconfigurations).</li>
+                            <li><strong>Burp Suite</strong>: Intercepts HTTP requests for manual testing.</li>
+                            <li><strong>OWASP ZAP</strong>: Automates vulnerability scans (e.g., finds 80% of XSS issues).</li>
+                            <li><strong>DAST</strong>: Tests running apps for runtime vulnerabilities.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>E-commerce</strong>: Securing payment gateways with Burp Suite.</li>
+                            <li><strong>Web Portals</strong>: Testing login systems for broken authentication.</li>
+                            <li><strong>APIs</strong>: Scanning REST endpoints with OWASP ZAP.</li>
+                            <li><strong>Compliance</strong>: Ensuring PCI-DSS compliance with scans.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes improve testing skills.</p>
+                    </div>
+                `
+            },
+            'mobile-security': {
+                title: 'Mobile Security Essentials',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Mobile security protects apps and devices from threats like data leakage, insecure APIs, and jailbreaking.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Data Encryption</strong>: AES-256 for data at rest (e.g., securing app databases).</li>
+                            <li><strong>App Sandboxing</strong>: Isolates apps to prevent unauthorized access.</li>
+                            <li><strong>Insecure APIs</strong>: Validates API inputs (e.g., prevents 70% of API attacks).</li>
+                            <li><strong>Jailbreaking/Rooting</strong>: Detects modified devices to block exploits.</li>
+                            <li><strong>Secure Storage</strong>: Uses Keychain (iOS) or Keystore (Android).</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Banking Apps</strong>: Encrypting transaction data.</li>
+                            <li><strong>Health Apps</strong>: Protecting PHI under HIPAA.</li>
+                            <li><strong>Enterprise Apps</strong>: Securing MDM-managed devices.</li>
+                            <li><strong>Messaging Apps</strong>: Using end-to-end encryption like Signal.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes secure mobile platforms.</p>
+                    </div>
+                `
+            },
+            'essential-tools': {
+                title: 'Essential Security Tools',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Essential tools like Nmap, Metasploit, and Burp Suite support network and application security tasks.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Nmap</strong>: Scans ports/services (e.g., finds open ports in 5 seconds).</li>
+                            <li><strong>Metasploit</strong>: Exploits vulnerabilities (e.g., tests MS17-010 exploit).</li>
+                            <li><strong>Burp Suite</strong>: Tests web apps (e.g., intercepts HTTP requests).</li>
+                            <li><strong>Kali Linux</strong>: Security OS with 600+ tools pre-installed.</li>
+                            <li><strong>John the Ripper</strong>: Cracks passwords for auditing.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Network Security</strong>: Scanning with Nmap for open ports.</li>
+                            <li><strong>Penetration Testing</strong>: Exploiting vulnerabilities with Metasploit.</li>
+                            <li><strong>Web Security</strong>: Testing XSS with Burp Suite.</li>
+                            <li><strong>Password Auditing</strong>: Cracking weak passwords with John.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes empower tool mastery.</p>
+                    </div>
+                `
+            },
+            'command-references': {
+                title: 'Command References',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Command references provide quick access to Linux, PowerShell, and network commands for security tasks.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Linux Commands</strong>: 'netstat -tuln' for open ports, 'tcpdump' for packet capture.</li>
+                            <li><strong>PowerShell</strong>: 'Get-NetFirewallRule' for firewall rules, 'Get-Process' for monitoring.</li>
+                            <li><strong>Network Commands</strong>: 'ping' for connectivity, 'nslookup' for DNS queries.</li>
+                            <li><strong>Scripting</strong>: Automates tasks (e.g., Bash script for log analysis).</li>
+                            <li><strong>File Analysis</strong>: 'strings' to extract text from binaries.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Network Analysis</strong>: Using 'tcpdump' to capture packets.</li>
+                            <li><strong>System Hardening</strong>: Disabling services with PowerShell.</li>
+                            <li><strong>Automation</strong>: Scripting log analysis with Bash.</li>
+                            <li><strong>Forensics</strong>: Extracting data with 'strings' in malware analysis.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes streamline command usage.</p>
+                    </div>
+                `
+            },
+            'incident-response': {
+                title: 'Incident Response Checklists',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Incident response checklists provide structured steps to detect, contain, and recover from cyber incidents.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Preparation</strong>: Develops IR plans and playbooks (e.g., for ransomware).</li>
+                            <li><strong>Identification</strong>: Detects incidents with SIEM (e.g., Splunk alerts).</li>
+                            <li><strong>Containment</strong>: Isolates systems (e.g., 80% faster with automation, NIST).</li>
+                            <li><strong>Eradication</strong>: Removes malware (e.g., using EDR tools like CrowdStrike).</li>
+                            <li><strong>Recovery</strong>: Restores systems from backups.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Ransomware</strong>: Isolating infected endpoints with EDR.</li>
+                            <li><strong>Data Breaches</strong>: Investigating leaks with log analysis.</li>
+                            <li><strong>Phishing</strong>: Resetting compromised credentials.</li>
+                            <li><strong>DDoS</strong>: Mitigating attacks with CDN services like Cloudflare.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Curated by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes optimize incident response.</p>
+                    </div>
+                `
+            },
+            'further-learning': {
+                title: 'Further Learning Resources',
+                content: `
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Overview</h4>
+                        <p>Curated resources like books, courses, and communities to advance cyber security expertise.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Concepts</h4>
+                        <ul class="detail-list">
+                            <li><strong>Books</strong>: "Hacking: The Art of Exploitation" by Jon Erickson for hands-on skills.</li>
+                            <li><strong>Courses</strong>: TryHackMe and Cybrary for practical labs (e.g., 100+ CTF challenges).</li>
+                            <li><strong>Communities</strong>: Reddit’s r/netsec, DEFCON forums for peer learning.</li>
+                            <li><strong>Certifications</strong>: CEH, CISSP, CompTIA Security+ (e.g., CISSP held by 150K professionals).</li>
+                            <li><strong>CTFs</strong>: Capture The Flag events for skill-building.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Practical Applications</h4>
+                        <ul class="detail-list">
+                            <li><strong>Skill Development</strong>: Practicing in TryHackMe’s CTF rooms.</li>
+                            <li><strong>Networking</strong>: Engaging in DEFCON groups.</li>
+                            <li><strong>Career Advancement</strong>: Earning CISSP for leadership roles.</li>
+                            <li><strong>Research</strong>: Reading “The Web Application Hacker’s Handbook”.</li>
+                        </ul>
+                    </div>
+                    <div class="detail-section">
+                        <h4 class="detail-subheader">Key Note</h4>
+                        <p>Developed by the Codar Cyber Security 2025/2026 Batch under Coach Oluwatimileyin Johnson, these notes guide continuous learning.</p>
+                    </div>
+                `
+            }
+        };
+
+        // Function to generate random bits for the cyber background
+        function createBits() {
+            const bitsContainer = document.getElementById('bits');
+            const numBits = 150;
+            for (let i = 0; i < numBits; i++) {
+                const bit = document.createElement('div');
+                const size = Math.random();
+                bit.className = `bit ${size < 0.5 ? 'small-bit' : size < 0.8 ? 'medium-bit' : 'large-bit'}`;
+                bit.style.left = `${Math.random() * 100}%`;
+                bit.style.top = `${Math.random() * 100}%`;
+                bit.style.animationDelay = `${Math.random() * 7}s`;
+                bitsContainer.appendChild(bit);
+            }
+        }
+
+        // Function to generate floating data particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numParticles = 30;
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'data-particle';
+                particle.style.width = `${Math.random() * 5 + 3}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Function to cycle through themes
+        const themes = ['day', 'night', 'twilight', 'aurora'];
+        let currentThemeIndex = 0;
+
+        function cycleTheme() {
+            const body = document.body;
+            const modeToggle = document.querySelector('.mode-toggle i');
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            body.setAttribute('data-theme', newTheme);
+
+            // Update icon based on theme
+            modeToggle.className = 'fas';
+            if (newTheme === 'day') modeToggle.classList.add('fa-sun');
+            else if (newTheme === 'night') modeToggle.classList.add('fa-moon');
+            else if (newTheme === 'twilight') modeToggle.classList.add('fa-star');
+            else if (newTheme === 'aurora') modeToggle.classList.add('fa-cloud-sun');
+        }
+
+        // Function to display detailed content in the overlay
+        function toggleDetail(key) {
+            const overlay = document.getElementById('detailOverlay');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailContent = document.getElementById('detailContent');
+            const details = knowledgeDetails[key];
+            if (details) {
+                detailTitle.innerHTML = details.title;
+                detailContent.innerHTML = details.content;
+                overlay.style.display = 'flex';
+            }
+        }
+
+        // Function to close the detail overlay
+        function closeDetail() {
+            const overlay = document.getElementById('detailOverlay');
+            overlay.style.display = 'none';
+        }
+
+        // Set the current year in the footer
+        document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+        // Initialize bits, particles, and theme on page load
+        window.onload = () => {
+            createBits();
+            createParticles();
+            document.body.setAttribute('data-theme', 'day');
+            document.querySelector('.mode-toggle i').classList.add('fa-sun');
+        };
+
+        // Add event listener for escape key to close overlay
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeDetail();
+            }
+        });
+    </script>
+</body>
+</html>
